@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import path from 'path';
 import routes from './routes';
 import './database';
 
@@ -12,6 +13,10 @@ class App {
 
   middlewares() {
     this.app.use(bodyParser.json());
+    this.app.use(
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
   }
 
   routes() {
