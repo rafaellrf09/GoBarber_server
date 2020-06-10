@@ -29,7 +29,7 @@ class UserController {
   async update(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string(),
-      email: Yup.email(),
+      email: Yup.string().email(),
       oldPassword: Yup.string().min(6),
       password: Yup.string()
         .min(6)
@@ -70,7 +70,10 @@ class UserController {
 
   async delete(req, res) {}
 
-  async show(req, res) {}
+  async index(req, res) {
+    const users = await User.findAll();
+    res.json(users);
+  }
 }
 
 export default new UserController();
