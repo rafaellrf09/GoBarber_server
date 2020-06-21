@@ -3,6 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
+import cors from 'cors';
 import * as Sentry from '@sentry/node';
 import Youch from 'youch';
 import 'express-async-errors';
@@ -24,6 +25,7 @@ class App {
   middlewares() {
     this.app.use(Sentry.Handlers.requestHandler());
     this.app.use(bodyParser.json());
+    this.app.use(cors());
     this.app.use(
       '/files',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
